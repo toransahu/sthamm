@@ -54,8 +54,14 @@ class ShellHistoryFile(object):
         BASH = 0
         ZSH_WITH_EPOCH = 1
 
-    def __init__(self, file):
-        self.file = file
+    def __init__(self, filepath):
+        self.filepath = filepath
+        self.lines = list()
+        self.read_lines()
+
+    def read_lines(self):
+        with open(self.filepath, 'r') as fp:
+            self.lines = fp.readlines()
 
     @property
     def in_plain_style(self):
@@ -64,8 +70,17 @@ class ShellHistoryFile(object):
     def convert(self, format=FILE_FORMAT.BASH):
         pass
 
+    def unique(self, overwrite=False):
+        unique_lines = set(self.lines)
+        if overwrite:
+            self.lines = unique_lines
+        return unique_lines 
+
 
 if __name__ == '__main__':
     fm = FileMerge('local_file', 'remote_file')
-    fm.merge_policies.update({1, 2})
-    shf = ShellHistoryFile('local_file')
+    # fm.merge_policies.update({1, 2})
+    # shf = ShellHistoryFile('local_file')
+    shf = ShellHistoryFile('/home/toransahu/Desktop/a.txt')
+    from pprint import pprint
+    pprint("\n".join(shf.lines))
