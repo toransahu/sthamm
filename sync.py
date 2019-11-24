@@ -61,8 +61,8 @@ ZSH_HIST_EPOCH_FORMAT = re.compile(ZSH_HIST_EPOCH_PATTERN)
 
 
 class FILE_STYLE(object):
-        BASH = 0
-        ZSH_WITH_EPOCH = 1
+    BASH = 0
+    ZSH_WITH_EPOCH = 1
 
 
 class ShellHistoryFile(object):
